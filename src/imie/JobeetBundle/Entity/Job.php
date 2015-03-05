@@ -3,6 +3,7 @@
 namespace imie\JobeetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use imie\JobeetBundle\Utils\Jobeet as Jobeet;
 
 /**
  * Job
@@ -37,6 +38,7 @@ class Job
     /**
      * @var string
      */
+
     private $position;
 
     /**
@@ -150,6 +152,16 @@ class Job
     {
         return $this->company;
     }
+    
+    /**
+     * Get company
+     *
+     * @return string 
+     */
+    public function getCompanySlug()
+    {
+        return Jobeet::slugify($this->getCompany());
+    }
 
     /**
      * Set logo
@@ -221,6 +233,14 @@ class Job
     }
 
     /**
+     *
+     */
+    public function getPositionSlug()
+    {
+        return Jobeet::slugify($this->getPosition());
+    }
+
+    /**
      * Set location
      *
      * @param string $location
@@ -241,6 +261,14 @@ class Job
     public function getLocation()
     {
         return $this->location;
+    }
+
+     /**
+     *
+     */
+     public function getLocationSlug()
+     {
+        return Jobeet::slugify($this->getLocation());
     }
 
     /**
@@ -477,10 +505,10 @@ class Job
      */
     public function setCreatedAtValue()
     {
-         if(!$this->getCreatedAt()) {
-            $this->created_at = new \DateTime();
-        }
+       if(!$this->getCreatedAt()) {
+        $this->created_at = new \DateTime();
     }
+}
 
     /**
      * @ORM\PreUpdate
