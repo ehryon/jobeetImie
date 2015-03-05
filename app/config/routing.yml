@@ -1,0 +1,7 @@
+imie_jobeet:
+    resource: "@imieJobeetBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: @AppBundle/Controller/
+    type:     annotation

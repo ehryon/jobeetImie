@@ -1,0 +1,11 @@
+imie_jobeet_imie_job:
+    resource: "@imieJobeetBundle/Resources/config/routing/job.yml"
+    prefix:   /imie_job
+
+imie_jobeet_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: imieJobeetBundle:Default:index }
+
+imieJobeetBundle_job:
+        resource: "@imieJobeetBundle/Resources/config/routing/job.yml"
+        prefix:   /job

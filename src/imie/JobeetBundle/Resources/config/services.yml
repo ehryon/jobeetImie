@@ -1,0 +1,4 @@
+services:
+#    imie_jobeet.example:
+#        class: imie\JobeetBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
