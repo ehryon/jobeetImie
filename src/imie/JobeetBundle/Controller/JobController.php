@@ -16,19 +16,24 @@ class JobController extends Controller
 {
 
     /**
-     * Lists all Job entities.
+     * return job categories
      *
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('imieJobeetBundle:Job')->findAll();
+        $categories = $em->getRepository('imieJobeetBundle:Category')->getWithJobs();
+
+        foreach($categories as $category) {
+            $category->setActiveJobs($em->getRepository('imieJobeetBundle:Job')->getActiveJobs($category->getId(), $this->container->getParameter('max_jobs_on_homepage')));
+        }
 
         return $this->render('imieJobeetBundle:Job:index.html.twig', array(
-            'entities' => $entities,
+            'categories' => $categories
         ));
     }
+
     /**
      * Creates a new Job entity.
      *
@@ -50,7 +55,7 @@ class JobController extends Controller
         return $this->render('imieJobeetBundle:Job:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        ));
+            ));
     }
 
     /**
@@ -65,7 +70,7 @@ class JobController extends Controller
         $form = $this->createForm(new JobType(), $entity, array(
             'action' => $this->generateUrl('imie_job_create'),
             'method' => 'POST',
-        ));
+            ));
 
         $form->add('submit', 'submit', array('label' => 'Create'));
 
@@ -84,7 +89,7 @@ class JobController extends Controller
         return $this->render('imieJobeetBundle:Job:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        ));
+            ));
     }
 
     /**
@@ -95,7 +100,7 @@ class JobController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('imieJobeetBundle:Job')->find($id);
+        $entity = $em->getRepository('imieJobeetBundle:Job')->getActiveJob($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Job entity.');
@@ -106,7 +111,7 @@ class JobController extends Controller
         return $this->render('imieJobeetBundle:Job:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
-        ));
+            ));
     }
 
     /**
@@ -130,7 +135,7 @@ class JobController extends Controller
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+            ));
     }
 
     /**
@@ -145,7 +150,7 @@ class JobController extends Controller
         $form = $this->createForm(new JobType(), $entity, array(
             'action' => $this->generateUrl('imie_job_update', array('id' => $entity->getId())),
             'method' => 'PUT',
-        ));
+            ));
 
         $form->add('submit', 'submit', array('label' => 'Update'));
 
@@ -179,7 +184,7 @@ class JobController extends Controller
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+            ));
     }
     /**
      * Deletes a Job entity.
@@ -215,10 +220,10 @@ class JobController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('imie_job_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+        ->setAction($this->generateUrl('imie_job_delete', array('id' => $id)))
+        ->setMethod('DELETE')
+        ->add('submit', 'submit', array('label' => 'Delete'))
+        ->getForm()
         ;
     }
 }

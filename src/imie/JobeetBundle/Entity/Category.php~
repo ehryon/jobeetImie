@@ -30,11 +30,6 @@ class Category
     private $affiliates;
 
     /**
-     * @var 
-     */
-    private $active_jobs;
-
-    /**
      * Constructor
      */
     public function __construct()
@@ -142,22 +137,6 @@ class Category
         return $this->affiliates;
     }
     
-    /**
-     * Set Active Job
-     */
-    public function setActiveJobs($jobs)
-    {
-        $this->active_jobs = $jobs;
-    }
-
-    /**
-     * Get Actiobs
-     */
-    public function getActiveJobs()
-    {
-        return $this->active_jobs;
-    }
-
     /**
      *
      */

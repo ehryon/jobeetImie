@@ -1,5 +1,6 @@
 imie\JobeetBundle\Entity\Category:
     type: entity
+    repositoryClass: imie\JobeetBundle\Repository\CategoryRepository
     table: category
     id:
         id:
