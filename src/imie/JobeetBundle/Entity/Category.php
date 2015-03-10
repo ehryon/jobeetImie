@@ -3,6 +3,7 @@
 namespace imie\JobeetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use imie\JobeetBundle\Utils\Jobeet as Jobeet;
 
 /**
  * Category
@@ -151,7 +152,7 @@ class Category
     }
 
     /**
-     * Get Actiobs
+     * Get Active Jobs
      */
     public function getActiveJobs()
     {
@@ -159,7 +160,33 @@ class Category
     }
 
     /**
+     * Returns slugified name 
+     */
+    public function getSlug()
+    {
+        return Jobeet::slugify($this->getName());
+    }
+
+    /*
      *
+     */
+    public function setMoreJobs($jobs)
+    {
+        $this->more_jobs = $jobs >=  0 ? $jobs : 0;
+    }
+
+    /*
+     *
+     */
+    public function getMoreJobs()
+    {
+        return $this->more_jobs;
+    }
+
+    /**
+     * returns this name
+     *
+     *@return string
      */
     public function __toString()
     {

@@ -10,8 +10,6 @@ imieJobeetBundle_job:
         resource: "@imieJobeetBundle/Resources/config/routing/job.yml"
         prefix:   /job
 
-ibw_job_show:
-    pattern:  /{company}/{location}/{id}/{position}
-    defaults: { _controller: "IbwJobeetBundle:Job:show" }
-    requirements:
-        id:  \d+
+imieJobeetBundle_category:
+        pattern: /category/{slug}
+        defaults: {_controller: imieJobeetBundle:Category:show }

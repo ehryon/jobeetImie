@@ -12,6 +12,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+	/**
+	 * Get the jobs that are not expired
+	 */
 	public function getWithJobs()
 	{
 		$query = $this->getEntityManager()->createQuery(
