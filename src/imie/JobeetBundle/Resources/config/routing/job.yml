@@ -8,6 +8,11 @@ imie_job_show:
     requirements:
         id:  \d+
 
+imie_job_preview:
+    pattern: /{company}/{location}/{token}/{position}
+    defaults: { _controller: "imieJobeetBundle:Job:preview" }
+    requirements:
+        token: \w+
 # imie_job_show:
 #     pattern:  /{company}/{location}/{id}/{position}
 #     defaults: { _controller: "imieJobeetBundle:Job:show" }
@@ -26,15 +31,15 @@ imie_job_create:
     requirements: { _method: post }
 
 imie_job_edit:
-    path:     /{id}/edit
+    path:     /{token}/edit
     defaults: { _controller: "imieJobeetBundle:Job:edit" }
 
 imie_job_update:
-    path:     /{id}/update
+    path:     /{token}/update
     defaults: { _controller: "imieJobeetBundle:Job:update" }
     requirements: { _method: post|put }
 
 imie_job_delete:
-    path:     /{id}/delete
+    path:     /{token}/delete
     defaults: { _controller: "imieJobeetBundle:Job:delete" }
     requirements: { _method: post|delete }
