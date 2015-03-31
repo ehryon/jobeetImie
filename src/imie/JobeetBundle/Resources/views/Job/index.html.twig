@@ -28,13 +28,12 @@
                         </tr>
                     {% endfor %}
                 </table>
-                {% if category.morejobs %}
+                 {% if category.morejobs %}
                     <div class="more_jobs">
                         and <a href="{{ path('imieJobeetBundle_category', { 'slug': category.slug }) }}">{{ category.morejobs }}</a>
                         more...
                     </div>
                 {% endif %}
-            </div>
             </div>
         {% endfor %}
     </div>

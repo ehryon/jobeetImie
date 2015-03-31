@@ -8,8 +8,8 @@ use imie\JobeetBundle\Utils\Jobeet as Jobeet;
 /**
  * Category
  */
-class Category
-{
+class Category {
+
     /**
      * @var integer
      */
@@ -36,10 +36,15 @@ class Category
     private $active_jobs;
 
     /**
+     *
+     * @var type 
+     */
+    private $more_jobs;
+
+    /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->jobs = new \Doctrine\Common\Collections\ArrayCollection();
         $this->affiliates = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -49,8 +54,7 @@ class Category
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -60,8 +64,7 @@ class Category
      * @param string $name
      * @return Category
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -72,8 +75,7 @@ class Category
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -83,8 +85,7 @@ class Category
      * @param \imie\JobeetBundle\Entity\Job $jobs
      * @return Category
      */
-    public function addJob(\imie\JobeetBundle\Entity\Job $jobs)
-    {
+    public function addJob(\imie\JobeetBundle\Entity\Job $jobs) {
         $this->jobs[] = $jobs;
 
         return $this;
@@ -95,8 +96,7 @@ class Category
      *
      * @param \imie\JobeetBundle\Entity\Job $jobs
      */
-    public function removeJob(\imie\JobeetBundle\Entity\Job $jobs)
-    {
+    public function removeJob(\imie\JobeetBundle\Entity\Job $jobs) {
         $this->jobs->removeElement($jobs);
     }
 
@@ -105,8 +105,7 @@ class Category
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getJobs()
-    {
+    public function getJobs() {
         return $this->jobs;
     }
 
@@ -116,8 +115,7 @@ class Category
      * @param \imie\JobeetBundle\Entity\Affiliate $affiliates
      * @return Category
      */
-    public function addAffiliate(\imie\JobeetBundle\Entity\Affiliate $affiliates)
-    {
+    public function addAffiliate(\imie\JobeetBundle\Entity\Affiliate $affiliates) {
         $this->affiliates[] = $affiliates;
 
         return $this;
@@ -128,8 +126,7 @@ class Category
      *
      * @param \imie\JobeetBundle\Entity\Affiliate $affiliates
      */
-    public function removeAffiliate(\imie\JobeetBundle\Entity\Affiliate $affiliates)
-    {
+    public function removeAffiliate(\imie\JobeetBundle\Entity\Affiliate $affiliates) {
         $this->affiliates->removeElement($affiliates);
     }
 
@@ -138,58 +135,77 @@ class Category
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getAffiliates()
-    {
+    public function getAffiliates() {
         return $this->affiliates;
     }
-    
+
     /**
      * Set Active Job
      */
-    public function setActiveJobs($jobs)
-    {
+    public function setActiveJobs($jobs) {
         $this->active_jobs = $jobs;
     }
 
     /**
      * Get Active Jobs
      */
-    public function getActiveJobs()
-    {
+    public function getActiveJobs() {
         return $this->active_jobs;
     }
 
     /**
      * Returns slugified name 
      */
-    public function getSlug()
-    {
-        return Jobeet::slugify($this->getName());
+    public function getSlug() {
+        return $this->slug;
     }
 
     /*
      *
      */
-    public function setMoreJobs($jobs)
-    {
-        $this->more_jobs = $jobs >=  0 ? $jobs : 0;
+
+    public function setMoreJobs($jobs) {
+        $this->more_jobs = $jobs >= 0 ? $jobs : 0;
     }
 
     /*
      *
      */
-    public function getMoreJobs()
-    {
+
+    public function getMoreJobs() {
         return $this->more_jobs;
     }
 
     /**
      * returns this name
      *
-     *@return string
+     * @return string
      */
-    public function __toString()
-    {
+    public function __toString() {
         return $this->getName() ? $this->getName() : "";
     }
+
+    /**
+     * @var string
+     */
+    private $slug;
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Category
+     */
+    public function setSlug($slug) {
+        $this->slug = Jobeet::slugify($this->getName());
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setSlugValue() {
+        // Add your code here
+    }
+
 }

@@ -5,3 +5,7 @@ imie_jobeet:
 app:
     resource: @AppBundle/Controller/
     type:     annotation
+
+imieJobeetBundle_category:
+    pattern:  /category/{slug}
+    defaults: { _controller: imieJobeetBundle:Category:show }

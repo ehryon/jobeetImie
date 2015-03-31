@@ -20,20 +20,21 @@ class JobController extends Controller
      *
      */
     public function indexAction()
+{
+    $em = $this->getDoctrine()->getManager();
+ 
+    $categories = $em->getRepository('imieJobeetBundle:Category')->getWithJobs();
+ 
+    foreach($categories as $category)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $categories = $em->getRepository('imieJobeetBundle:Category')->getWithJobs();
-
-        foreach($categories as $category) {
-            $category->setActiveJobs($em->getRepository('imieJobeetBundle:Job')->getActiveJobs($category->getId(), $this->container->getParameter('max_jobs_on_homepage')));
-            $category->setMoreJobs($em->getRepository('imieJobeetBundle:Job')->countActiveJobs($category->getId()) - $this->container->getParameter('max_jobs_on_homepage'));
-        }
-
-        return $this->render('imieJobeetBundle:Job:index.html.twig', array(
-            'categories' => $categories
-        ));
+        $category->setActiveJobs($em->getRepository('imieJobeetBundle:Job')->getActiveJobs($category->getId(), $this->container->getParameter('max_jobs_on_homepage')));
+        $category->setMoreJobs($em->getRepository('imieJobeetBundle:Job')->countActiveJobs($category->getId()) - $this->container->getParameter('max_jobs_on_homepage'));
     }
+ 
+    return $this->render('imieJobeetBundle:Job:index.html.twig', array(
+        'categories' => $categories
+    ));
+}
 
     /**
      * Creates a new Job entity.

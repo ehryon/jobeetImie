@@ -3,6 +3,7 @@
 namespace imie\JobeetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use imie\JobeetBundle\Utils\Jobeet as Jobeet;
 
 /**
  * Category
@@ -28,6 +29,17 @@ class Category
      * @var \Doctrine\Common\Collections\Collection
      */
     private $affiliates;
+
+    /**
+     * @var 
+     */
+    private $active_jobs;
+    
+   /**
+    *
+    * @var type 
+    */
+    private $more_jobs;
 
     /**
      * Constructor
@@ -138,7 +150,49 @@ class Category
     }
     
     /**
+     * Set Active Job
+     */
+    public function setActiveJobs($jobs)
+    {
+        $this->active_jobs = $jobs;
+    }
+
+    /**
+     * Get Active Jobs
+     */
+    public function getActiveJobs()
+    {
+        return $this->active_jobs;
+    }
+
+    /**
+     * Returns slugified name 
+     */
+    public function getSlug()
+    {
+        return Jobeet::slugify($this->getName());
+    }
+
+    /*
      *
+     */
+    public function setMoreJobs($jobs)
+    {
+        $this->more_jobs = $jobs >=  0 ? $jobs : 0;
+    }
+
+    /*
+     *
+     */
+    public function getMoreJobs()
+    {
+        return $this->more_jobs;
+    }
+
+    /**
+     * returns this name
+     *
+     *@return string
      */
     public function __toString()
     {
