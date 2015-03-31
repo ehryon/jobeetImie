@@ -16,5 +16,5 @@ parameters:
 
     locale:            en
 
-    # A secret key that's used to generate certain security-related tokens
+    # A secret key that's used to generate certain security-related tokimie
     secret:            ThisTokenIsNotSoSecretChangeIt

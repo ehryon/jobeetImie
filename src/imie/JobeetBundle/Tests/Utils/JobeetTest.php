@@ -7,12 +7,12 @@ use imie\JobeetBundle\Utils\Jobeet;
 class JobeetTest extends \PHPUnit_Framework_TestCase {
 
     public function testSlugify() {
-        $this->assertEquals('sensio', Jobeet::slugify('Sensio'));
-        $this->assertEquals('sensio-labs', Jobeet::slugify('sensio labs'));
-        $this->assertEquals('sensio-labs', Jobeet::slugify('sensio labs'));
+        $this->assertEquals('simieio', Jobeet::slugify('Simieio'));
+        $this->assertEquals('simieio-labs', Jobeet::slugify('simieio labs'));
+        $this->assertEquals('simieio-labs', Jobeet::slugify('simieio labs'));
         $this->assertEquals('paris-france', Jobeet::slugify('paris,france'));
-        $this->assertEquals('sensio', Jobeet::slugify(' sensio'));
-        $this->assertEquals('sensio', Jobeet::slugify('sensio '));
+        $this->assertEquals('simieio', Jobeet::slugify(' simieio'));
+        $this->assertEquals('simieio', Jobeet::slugify('simieio '));
 
         $this->assertEquals('n-a', Jobeet::slugify(''));
         $this->assertEquals('n-a', Jobeet::slugify(' - '));
