@@ -13,3 +13,7 @@ imieJobeetBundle_job:
 imieJobeetBundle_category:
         pattern: /category/{slug}
         defaults: {_controller: imieJobeetBundle:Category:show }
+        
+imieJobeetBundle_category:
+    pattern: /category/{slug}/{page}
+    defaults: { _controller: imieJobeetBundle:Category:show, page: 1 }

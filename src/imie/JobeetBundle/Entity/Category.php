@@ -197,7 +197,8 @@ class Category {
      * @return Category
      */
     public function setSlug($slug) {
-        $this->slug = Jobeet::slugify($this->getName());
+        $this->slug = $slug;
+
         return $this;
     }
 
@@ -205,7 +206,7 @@ class Category {
      * @ORM\PrePersist
      */
     public function setSlugValue() {
-        // Add your code here
+        $this->slug = Jobeet::slugify($this->getName());
     }
 
 }

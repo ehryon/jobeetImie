@@ -1,0 +1,21 @@
+{% extends 'imieJobeetBundle::layout.html.twig' %}
+ 
+{% block title %}
+    Jobs in the {{ category.name }} category
+{% endblock %}
+ 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/imiejobeet/css/jobs.css') }}" type="text/css" media="all" />
+{% endblock %}
+ 
+{% block content %}
+    <div class="category">
+        <div class="feed">
+            <a href="">Feed</a>
+        </div>
+        <h1>{{ category.name }}</h1>
+    </div>
+ 
+    {{ include ('imieJobeetBundle:Job:list.html.twig', {'jobs': category.activejobs}) }}
+{% endblock %}
