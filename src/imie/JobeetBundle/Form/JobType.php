@@ -5,6 +5,7 @@ namespace imie\JobeetBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use imie\JobeetBundle\Entity\Job;
 
 class JobType extends AbstractType
 {

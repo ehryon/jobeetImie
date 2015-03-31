@@ -33,19 +33,16 @@ class JobController extends Controller {
     }
 
     /**
-     * Creates a new Job entity.
-     *
+     * 
+     * @return type
      */
-    public function createAction(Request $request) {
+    public function createAction() {
         $entity = new Job();
         $request = $this->getRequest();
-        $form = $this->createCreateForm($entity);
         $form = $this->createForm(new JobType(), $entity);
         $form->bindRequest($request);
-
-
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);
             $em->flush();
             return $this->redirect($this->generateUrl('imie_job_show', array(
@@ -85,11 +82,11 @@ class JobController extends Controller {
      */
     public function newAction() {
         $entity = new Job();
-        $form = $this->createCreateForm($entity);
-
+        $entity->setType('full-time');
+        $form = $this->createForm(new JobType(), $entity);
         return $this->render('imieJobeetBundle:Job:new.html.twig', array(
                     'entity' => $entity,
-                    'form' => $form->createView(),
+                    'form' => $form->createView()
         ));
     }
 
